@@ -1,9 +1,15 @@
-# ZeroTier-GUI <img src="img/zerotier-gui.png" align="bottom">
+# ZeroTier-GKT <img src="img/zerotier-gui.png" align="bottom">
+
+A Rewritten app for Gnome and Flatpak
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg?style=flat-square)](https://github.com/tralph3/ZeroTier-GUI/blob/master/LICENSE)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-blue.svg?style=flat-square)](https://paypal.me/tralph3)
 
 **A Linux front-end for ZeroTier**
+
+
+
+**Warning the app it's not ready for use, please use zerotier-gui**
 
 ### Manage Networks
 <img src="img/managenetworks1.png " width="1000">
