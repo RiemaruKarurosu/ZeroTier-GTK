@@ -1,0 +1,6 @@
+data/org.gnome.zerotiergtk.desktop.in
+data/org.gnome.zerotiergtk.appdata.xml.in
+data/org.gnome.zerotiergtk.gschema.xml
+src/main.py
+src/window.py
+src/window.ui
