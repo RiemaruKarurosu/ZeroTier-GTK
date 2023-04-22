@@ -1,6 +1,8 @@
 import requests
 import subprocess
 import psutil
+import os
+from pathlib import Path
 
 
 #
@@ -11,6 +13,8 @@ import psutil
 class ZeroTierNetwork:
     COMMANDS = ('start', 'stop', 'enable', 'disable')
     URL = 'http://localhost:9993/'
+    PATH = Path.home() / '.config' / 'ztlib'
+    FILE = 'zt.conf'
 
     def __init__(self, api_token=None):
         self.api_token = api_token
@@ -18,8 +22,20 @@ class ZeroTierNetwork:
         self.listNetworks = []
         if api_token:
             self.headers = {'X-ZT1-Auth': f'{api_token}'}
+        else:
+            self.headers = None
 
-    ## ZeroTier Status:
+    def ztStart(self) -> str:
+        if not self.checkToken(self.api_token):
+            if self.readToken() == 401 or self.readToken() == 404:
+                if self.checkToken(self.getToken()):
+                    return 'OK'
+                else:
+                    return 'MISSING ROOT PERMISSION'
+            return 'OK'
+        return 'OK'
+
+        # ZeroTier Status:
 
     # Check if ZeroTier-One is active
     def ztStatus(self):
@@ -43,6 +59,49 @@ class ZeroTierNetwork:
             print('Error al iniciar el servicio de ZeroTier:', result.stderr.strip())
         self.serviceStatus = None
 
+    # Save apiToken to ~/.config
+    def readToken(self) -> int:
+        configpath = self.PATH / self.FILE
+        if configpath.exists():
+            with open(configpath, 'r') as configfile:
+                apitoken = configfile.readlines()
+            for token in apitoken:
+                if token.startswith('X-ZT1-Auth'):
+                    key, value = token.split('=')
+                    api_token = value.strip()
+                    if self.checkToken(api_token):
+                        self.api_token = api_token
+                        self.headers = {'X-ZT1-Auth': f'{api_token}'}
+                    else:
+                        return 401
+            return 200
+        else:
+            return 404
+
+    def checkToken(self, api_token):
+        url = self.URL + 'status'
+        header = {'X-ZT1-Auth': f'{api_token}'}
+        response = requests.get(url, headers=header)
+        if response.status_code == 200:
+            return True
+        elif response.status_code == 401:
+            return False
+        else:
+            return False
+
+    def saveToken(self):
+        if not self.PATH.exists():
+            self.PATH.mkdir(parents=True)
+        configpath = self.PATH / self.FILE
+        if not configpath.exists():
+            configpath.touch()
+
+        with open(configpath, 'w') as configfile:
+            configfile.write(f'X-ZT1-Auth = {self.api_token} \n')
+
+        os.chmod(configpath, 0o600)
+        print(configpath)
+
     # Get the Token to use ZeroTierOne Service
     def getToken(self):
         try:
@@ -50,10 +109,13 @@ class ZeroTierNetwork:
             result = subprocess.run(cmd, capture_output=True, text=True, check=True)
             clave_api = result.stdout.strip()
             print(f'Saving API: {clave_api}')
-            self.api_token = clave_api
-            self.headers = {'X-ZT1-Auth': f'{self.api_token}'}
+            if self.checkToken(clave_api):
+                self.api_token = clave_api
+                self.headers = {'X-ZT1-Auth': f'{self.api_token}'}
+                self.saveToken()
+                return clave_api
         except subprocess.CalledProcessError:
-            print('Error[01]: MissingRootAdmin')
+            return 'Error[01]: MissingRootAdmin'
 
         # ListNetworks
 
@@ -63,20 +125,19 @@ class ZeroTierNetwork:
         else:
             url = self.URL + 'network'
         response = requests.get(url, headers=self.headers)
-        return response
+        return response.json()
 
     def joinNetworks(self, network):
         url = self.URL + 'network' + network
         response = requests.post(url, headers=self.headers)
-        print(response)
-        return response
+        print(response.json())
+        return response.json()
 
     def leaveNetworks(self, network):
         url = self.URL + 'network' + network
         response = requests.delete(url, headers=self.headers)
         print(response)
         return response
-        url = self.URL + 'network' + network
         # Peers
 
     def getPeers(self, network=None):
@@ -85,5 +146,5 @@ class ZeroTierNetwork:
         else:
             url = self.URL + 'peer'
         response = requests.get(url, headers=self.headers)
-        print(response)
-        return response
+        print(response.json())
+        return response.json()
