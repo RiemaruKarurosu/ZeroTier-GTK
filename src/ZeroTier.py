@@ -133,6 +133,9 @@ class ZeroTierNetwork:
         print(response.json())
         return response.json()
 
+    def updateNetwork(self, network, config):
+        # Version 2.0 plan.
+        pass
     def leaveNetworks(self, network):
         url = self.URL + 'network' + network
         response = requests.delete(url, headers=self.headers)
@@ -148,3 +151,4 @@ class ZeroTierNetwork:
         response = requests.get(url, headers=self.headers)
         print(response.json())
         return response.json()
+
