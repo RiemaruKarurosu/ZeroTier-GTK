@@ -30,6 +30,7 @@ zerotier_gtk_sources = [
   '__init__.py',
   'main.py',
   'window.py',
+  'zerotierlib.py',
 ]
 
 install_data(zerotier_gtk_sources, install_dir: moduledir)

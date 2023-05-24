@@ -24,7 +24,7 @@ from gi.repository import Gtk
 class ZerotierGtkWindow(Adw.ApplicationWindow):
     __gtype_name__ = 'ZerotierGtkWindow'
 
-    label = Gtk.Template.Child()
+    my_infobar = Gtk.Template.Child()
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)

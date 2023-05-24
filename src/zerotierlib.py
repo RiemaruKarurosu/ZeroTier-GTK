@@ -1,9 +1,11 @@
+
 import requests
+''''
 import subprocess
 import psutil
 import os
 from pathlib import Path
-
+'''
 
 #
 # ZeroTier Class
@@ -13,7 +15,7 @@ from pathlib import Path
 class ZeroTierNetwork:
     COMMANDS = ('start', 'stop', 'enable', 'disable')
     URL = 'http://localhost:9993/'
-    PATH = Path.home() / '.config' / 'ztlib'
+    #PATH = Path.home() / '.config' / 'ztlib'
     FILE = 'zt.conf'
 
     def __init__(self, api_token=None):

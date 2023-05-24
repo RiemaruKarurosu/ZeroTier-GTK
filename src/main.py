@@ -19,6 +19,7 @@
 
 import sys
 import gi
+from zerotier_gtk.zerotierlib import *
 
 
 
@@ -80,7 +81,7 @@ class ZerotierGtkApplication(Adw.Application):
                                 application_icon='org.gnome.zerotiergtk',
                                 developer_name='Zerotier-GTK',
                                 version='0.1.1-alpha',
-                                developers=['Tomás Ralph'],
+                                developers=['Riemaru Karurosu'],
                                 copyright='© 2023 Zerotier-GUI',
                                 issue_url='https://github.com/RiemaruKarurosu/ZeroTier-GUI')
         about.present()
