@@ -23,6 +23,9 @@
         "*.a"
     ],
     "modules" : [
+	"python3-requests.json",
+	"python3-psutil.json",
+	"python3-pathlib2.json",
         {
             "name" : "zerotier-gtk",
             "builddir" : true,
