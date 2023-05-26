@@ -41,7 +41,7 @@
             <child>
               <object class="GtkLabel" id="my_label">
                 <property name="visible">True</property>
-                <property name="label">Warning: You need to start zerotier service, you could start at Settings-ZeroTier One, or opening a terminal and enter
+                <property name="label">Warning: You need to start zerotier service, you could start at Settings/ZeroTier One, or opening a terminal and enter
                   'sudo systemctl enable zerotier-one.service' otherwise, this app will not work.</property>
               </object>
             </child>

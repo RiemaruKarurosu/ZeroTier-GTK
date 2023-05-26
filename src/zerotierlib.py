@@ -2,6 +2,9 @@ import requests
 import subprocess
 import os
 import psutil
+
+#from gi.repository import Gio, GLib
+from pydbus import SystemBus
 from pathlib import Path
 
 #
@@ -10,7 +13,9 @@ from pathlib import Path
 #
 
 class ZeroTierNetwork:
+    # Won't work because flatpak, needs dbus rewrite'#
     COMMANDS = ('start', 'stop', 'enable', 'disable')
+    ###################################################
     URL = 'http://localhost:9993/'
     #PATH = Path.home() / '.config' / 'ztlib'
     FILE = 'zt.conf'
@@ -24,6 +29,7 @@ class ZeroTierNetwork:
         else:
             self.headers = None
 
+    # Won't work because flatpak, needs dbus rewrite
     def ztStart(self) -> str:
         if not self.checkToken(self.api_token):
             if self.readToken() == 401 or self.readToken() == 404:
@@ -37,10 +43,16 @@ class ZeroTierNetwork:
         # ZeroTier Status:
 
     # Check if ZeroTier-One is active
-    def ztStatus(self):
-        for proc in psutil.process_iter(['pid', 'name']):
-            if 'zerotier-one' in proc.info['name']:
-                return True
+    # New Pydbus implementation
+    def ztStatus(self) -> bool:
+        bus = SystemBus()
+        systemd = bus.get(".systemd1")
+        for unit in systemd.ListUnits():
+            if unit[0] == 'zerotier-one.service':
+                if unit[3] == "active" and unit[4] == 'running':
+                    return True
+                else:
+                    return False
         return False
 
     # Change ZeroTier-One service
@@ -49,6 +61,7 @@ class ZeroTierNetwork:
             self.serviceStatus = self.COMMANDS[setstatus - 1]
             self._ztActivate()
 
+    # Won't work because flatpak, needs dbus rewrite'
     def _ztActivate(self):
         result = subprocess.run(['pkexec', 'systemctl', self.serviceStatus, 'zerotier-one.service'],
                                 capture_output=True, text=True)

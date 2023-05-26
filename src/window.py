@@ -19,6 +19,7 @@
 
 from gi.repository import Adw
 from gi.repository import Gtk
+from zerotier_gtk.zerotierlib import *
 
 @Gtk.Template(resource_path='/org/gnome/zerotiergtk/window.ui')
 class ZerotierGtkWindow(Adw.ApplicationWindow):
@@ -28,3 +29,12 @@ class ZerotierGtkWindow(Adw.ApplicationWindow):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+
+
+    def on_check_lib(self):
+        ztlib = ZeroTierNetwork()
+        print(ztlib.ztStatus())
+        if ztlib.ztStatus():
+            self.my_infobar.set_visible(False)
+        else:
+            self.my_infobar.set_visible(True)

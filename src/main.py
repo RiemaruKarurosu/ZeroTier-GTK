@@ -21,8 +21,6 @@ import sys
 import gi
 from zerotier_gtk.zerotierlib import *
 
-
-
 gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')
 
@@ -32,6 +30,7 @@ from .window import ZerotierGtkWindow
 class AdwActionRowsManager:
     def __init__(self):
         self.action_rows = []
+
 
     def create_action_row(self, title, subtitle):
         action_row = Adw.ActionRow()
@@ -58,10 +57,7 @@ class ZerotierGtkApplication(Adw.Application):
         self.create_action('about', self.on_about_action)
         self.create_action('preferences', self.on_preferences_action)
 
-    def on_start_Zerotier(self):
-        node = libzt.ZeroTierNode()
-        node.node_start()
-        print(node.get_id())
+        self.zerotier_window = None
 
     def do_activate(self):
         """Called when the application is activated.
@@ -69,10 +65,12 @@ class ZerotierGtkApplication(Adw.Application):
         We raise the application's main window, creating it if
         necessary.
         """
-        win = self.props.active_window
-        if not win:
-            win = ZerotierGtkWindow(application=self)
-        win.present()
+        self.zerotier_window = self.props.active_window
+        if not self.zerotier_window:
+            self.zerotier_window = ZerotierGtkWindow(application=self)
+            self.zerotier_window.on_check_lib()
+            #zerotier_window = ZerotierGtkWindow(application=self)
+        self.zerotier_window.present()
 
     def on_about_action(self, widget, _):
         """Callback for the app.about action."""
@@ -86,11 +84,12 @@ class ZerotierGtkApplication(Adw.Application):
                                 issue_url='https://github.com/RiemaruKarurosu/ZeroTier-GUI')
         about.present()
 
-
     def on_preferences_action(self, widget, _):
         """Callback for the app.preferences action."""
         print('app.preferences action activated')
         #preferences = Adw
+        if self.zerotier_window:
+            self.zerotier_window.on_check_lib()
 
     def create_action_rows(self, window):
         """Create the action rows and add them to the window."""
