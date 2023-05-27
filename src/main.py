@@ -20,28 +20,13 @@
 import sys
 import gi
 from zerotier_gtk.zerotierlib import *
+from zerotier_gtk.preferences import *
 
 gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')
 
 from gi.repository import Gtk, Gio, Adw
 from .window import ZerotierGtkWindow
-
-class AdwActionRowsManager:
-    def __init__(self):
-        self.action_rows = []
-
-
-    def create_action_row(self, title, subtitle):
-        action_row = Adw.ActionRow()
-        action_row.props.title = title
-        action_row.props.subtitle = subtitle
-        self.action_rows.append(action_row)
-        return action_row
-
-    def get_action_rows(self):
-        return self.action_rows
-
 
 class ZerotierGtkApplication(Adw.Application):
     """The main application singleton class."""
@@ -50,7 +35,7 @@ class ZerotierGtkApplication(Adw.Application):
         super().__init__(application_id='org.gnome.zerotiergtk',
                          flags=Gio.ApplicationFlags.DEFAULT_FLAGS)
 
-        self.action_rows_manager = AdwActionRowsManager()
+        #self.action_rows_manager = AdwActionRowsManager()
 
 
         self.create_action('quit', lambda *_: self.quit(), ['<primary>q'])
@@ -78,7 +63,7 @@ class ZerotierGtkApplication(Adw.Application):
                                 application_name='zerotier-gtk',
                                 application_icon='org.gnome.zerotiergtk',
                                 developer_name='Zerotier-GTK',
-                                version='1.4.1-alpha',
+                                version='1.4.2-alpha',
                                 developers=['Riemaru Karurosu'],
                                 copyright='© 2023 Zerotier-GUI',
                                 issue_url='https://github.com/RiemaruKarurosu/ZeroTier-GUI')
@@ -86,43 +71,8 @@ class ZerotierGtkApplication(Adw.Application):
 
     def on_preferences_action(self, widget, _):
         """Callback for the app.preferences action."""
-        self.create_preferences_window()
+        preferences = PreferencesSettings(self.zerotier_window,self)
 
-    def create_preferences_window(self):
-        def on_switch_state_changed(switch,state):
-            if switch.get_active():
-                print('encendido')
-                pass
-            else:
-                print('apagado')
-                pass
-        window = Adw.PreferencesWindow(application=self)
-
-        page = Adw.PreferencesPage()
-
-        group = Adw.PreferencesGroup()
-        group.set_title("Zerotier Service")
-
-        start = Adw.ActionRow.new()
-        start.set_title("Start zerotier-service")
-        start.set_subtitle("The app needs this to work")
-
-        switch = Gtk.Switch()
-        if self.zerotier_window.on_check_lib():
-            switch.set_active(True)
-        else:
-            switch.set_active(False)
-        switch.set_halign(Gtk.Align.END)
-        switch.set_valign(Gtk.Align.CENTER)
-        switch.connect("state-set",on_switch_state_changed)
-
-
-        start.add_suffix(switch)
-        group.add(start)
-
-        page.add(group)
-        window.add(page)
-        window.present()
 
     def create_action_rows(self, window):
         """Create the action rows and add them to the window."""

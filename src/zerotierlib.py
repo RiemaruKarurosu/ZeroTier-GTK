@@ -55,11 +55,26 @@ class ZeroTierNetwork:
                     return False
         return False
 
+    def ztEnableStatus(self) -> bool:
+        bus = SystemBus()
+        systemd = bus.get(".systemd1")
+        state = systemd.GetUnitFileState(self.SERVICE)
+        print(state)
+        if state == 'enabled':
+            return True
+        elif state == 'disabled':
+            return False
+
     # Change ZeroTier-One service
     def service(self, setstatus):
         if setstatus:
-            self.serviceStatus = self.COMMANDS[setstatus - 1]
-            self._ztActivate()
+            try:
+                self.serviceStatus = self.COMMANDS[setstatus - 1]
+                self._ztActivate()
+                return True
+            except Exception:
+                return False
+
 
     def _ztActivate(self):
         print("llega aqui")

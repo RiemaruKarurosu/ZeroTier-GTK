@@ -40,5 +40,11 @@ class ZerotierGtkWindow(Adw.ApplicationWindow):
             return False
 
     def on_service_set(self,status):
-        self.ztlib.service(status)
+        status = self.ztlib.service(status)
+        self.on_check_lib()
+        return status
+
+    def get_service_status(self):
+        return self.ztlib.ztEnableStatus()
+
         
