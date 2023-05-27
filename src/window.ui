@@ -48,6 +48,10 @@
           </object>
         </child>
         <child>
+          <object class="GtkScrolledWindow">
+            <property name="hexpand">TRUE</property>
+            <property name="vexpand">TRUE</property>
+            <child>
           <object class="AdwPreferencesGroup" id="action_row">
             <property name="title">Networks: </property>
             <property name="margin-bottom">15</property>
@@ -116,6 +120,10 @@
                     <property name="valign">center</property>
                   </object>
                 </child>
+
+                </object>
+              </child>
+
               </object>
             </child>
           </object>

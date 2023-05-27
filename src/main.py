@@ -78,7 +78,7 @@ class ZerotierGtkApplication(Adw.Application):
                                 application_name='zerotier-gtk',
                                 application_icon='org.gnome.zerotiergtk',
                                 developer_name='Zerotier-GTK',
-                                version='0.1.1-alpha',
+                                version='1.4.1-alpha',
                                 developers=['Riemaru Karurosu'],
                                 copyright='© 2023 Zerotier-GUI',
                                 issue_url='https://github.com/RiemaruKarurosu/ZeroTier-GUI')
@@ -86,11 +86,43 @@ class ZerotierGtkApplication(Adw.Application):
 
     def on_preferences_action(self, widget, _):
         """Callback for the app.preferences action."""
-        print('app.preferences action activated')
-        #preferences = Adw
-        if self.zerotier_window:
-            self.zerotier_window.on_service_set(1)
-            self.zerotier_window.on_check_lib()
+        self.create_preferences_window()
+
+    def create_preferences_window(self):
+        def on_switch_state_changed(switch,state):
+            if switch.get_active():
+                print('encendido')
+                pass
+            else:
+                print('apagado')
+                pass
+        window = Adw.PreferencesWindow(application=self)
+
+        page = Adw.PreferencesPage()
+
+        group = Adw.PreferencesGroup()
+        group.set_title("Zerotier Service")
+
+        start = Adw.ActionRow.new()
+        start.set_title("Start zerotier-service")
+        start.set_subtitle("The app needs this to work")
+
+        switch = Gtk.Switch()
+        if self.zerotier_window.on_check_lib():
+            switch.set_active(True)
+        else:
+            switch.set_active(False)
+        switch.set_halign(Gtk.Align.END)
+        switch.set_valign(Gtk.Align.CENTER)
+        switch.connect("state-set",on_switch_state_changed)
+
+
+        start.add_suffix(switch)
+        group.add(start)
+
+        page.add(group)
+        window.add(page)
+        window.present()
 
     def create_action_rows(self, window):
         """Create the action rows and add them to the window."""
