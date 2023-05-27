@@ -89,6 +89,7 @@ class ZerotierGtkApplication(Adw.Application):
         print('app.preferences action activated')
         #preferences = Adw
         if self.zerotier_window:
+            self.zerotier_window.on_service_set(1)
             self.zerotier_window.on_check_lib()
 
     def create_action_rows(self, window):

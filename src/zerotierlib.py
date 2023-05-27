@@ -3,7 +3,6 @@ import subprocess
 import os
 import psutil
 
-#from gi.repository import Gio, GLib
 from pydbus import SystemBus
 from pathlib import Path
 
@@ -13,12 +12,12 @@ from pathlib import Path
 #
 
 class ZeroTierNetwork:
-    # Won't work because flatpak, needs dbus rewrite'#
+
     COMMANDS = ('start', 'stop', 'enable', 'disable')
-    ###################################################
     URL = 'http://localhost:9993/'
     #PATH = Path.home() / '.config' / 'ztlib'
     FILE = 'zt.conf'
+    SERVICE = 'zerotier-one.service'
 
     def __init__(self, api_token=None):
         self.api_token = api_token
@@ -29,7 +28,7 @@ class ZeroTierNetwork:
         else:
             self.headers = None
 
-    # Won't work because flatpak, needs dbus rewrite
+    # Won't work because flatpak, needs dbus rewrite'
     def ztStart(self) -> str:
         if not self.checkToken(self.api_token):
             if self.readToken() == 401 or self.readToken() == 404:
@@ -40,6 +39,7 @@ class ZeroTierNetwork:
             return 'OK'
         return 'OK'
 
+
         # ZeroTier Status:
 
     # Check if ZeroTier-One is active
@@ -48,7 +48,7 @@ class ZeroTierNetwork:
         bus = SystemBus()
         systemd = bus.get(".systemd1")
         for unit in systemd.ListUnits():
-            if unit[0] == 'zerotier-one.service':
+            if unit[0] == self.SERVICE:
                 if unit[3] == "active" and unit[4] == 'running':
                     return True
                 else:
@@ -61,14 +61,23 @@ class ZeroTierNetwork:
             self.serviceStatus = self.COMMANDS[setstatus - 1]
             self._ztActivate()
 
-    # Won't work because flatpak, needs dbus rewrite'
     def _ztActivate(self):
-        result = subprocess.run(['pkexec', 'systemctl', self.serviceStatus, 'zerotier-one.service'],
-                                capture_output=True, text=True)
-        if result.returncode == 0:
-            print('Servicio de ZeroTier iniciado exitosamente.')
+        print("llega aqui")
+        bus = SystemBus()
+        systemd = bus.get(".systemd1")
+        if self.serviceStatus == self.COMMANDS[0]:
+            response = systemd.StartUnit(self.SERVICE,"replace")
+            print(response)
+        elif self.serviceStatus == self.COMMANDS[1]:
+            systemd.StopUnit(self.SERVICE,"replace")
+        elif self.serviceStatus == self.COMMANDS[2]:
+            systemd.EnableUnitFiles([self.SERVICE],False,True)
+        elif self.serviceStatus == self.COMMANDS[3]:
+            systemd.DisableUnitFiles([self.SERVICE],False)
         else:
-            print('Error al iniciar el servicio de ZeroTier:', result.stderr.strip())
+            print("Error, no existe")
+
+
         self.serviceStatus = None
 
     # Save apiToken to ~/.config
@@ -148,6 +157,7 @@ class ZeroTierNetwork:
     def updateNetwork(self, network, config):
         # Version 2.0 plan.
         pass
+
     def leaveNetworks(self, network):
         url = self.URL + 'network' + network
         response = requests.delete(url, headers=self.headers)
@@ -163,4 +173,5 @@ class ZeroTierNetwork:
         response = requests.get(url, headers=self.headers)
         print(response.json())
         return response.json()
+
 
