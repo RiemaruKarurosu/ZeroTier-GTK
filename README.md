@@ -53,6 +53,12 @@ This are work in progress mokups, final version may differ.
 
 Don't try to download it, it won't work at all.
 
+## How to contribute
+
+Fork it and make a pull request.
+
+Ask for anything you require at issues or discussions.
+
 ## Troubleshooting
 
 NOT FOT ACTUAL USE.
