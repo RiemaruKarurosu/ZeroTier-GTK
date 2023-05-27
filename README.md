@@ -38,10 +38,18 @@ This are work in progress mokups, final version may differ.
 ## Features
 * Work in progress
 
+- [X] Detect if zerotier-one is alive
+- [ ] Give the option to configure the service
+- [ ] Show networks
+- [ ] Add a new network
+- [ ] View detail settings of a network
+- [ ] Disconnect from a network
+- [ ] Eliminate a network
+- [ ] Show Peers
+
 ## Download & Install
 
 Don't try to download it, it won't work at all.
-
 
 ## Troubleshooting
 
