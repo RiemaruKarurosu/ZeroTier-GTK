@@ -55,9 +55,12 @@ Don't try to download it, it won't work at all.
 
 ## How to contribute
 
-Fork it and make a pull request.
+How to contribute:
 
-Ask for anything you require at issues or discussions.
+https://github.com/RiemaruKarurosu/ZeroTier-GTK/wiki/How-to-contribute
+
+Zerotierlib doc:
+https://github.com/RiemaruKarurosu/ZeroTier-GTK/wiki/Zerotierlib-DOCS-v.1.4#zerotiernetwork/
 
 ## Troubleshooting
 
