@@ -6,9 +6,6 @@
     <property name="default-width">800</property>
     <property name="default-height">600</property>
     <property name="title">ZeroTier</property>
-    <style >
-      <class name="devel"></class>
-    </style>
     <child>
       <object class="GtkBox">
         <property name="orientation">vertical</property>
@@ -39,10 +36,9 @@
             <property name="visible">True</property>
             <property name="message-type">info</property>
             <child>
-              <object class="GtkLabel" id="my_label">
+              <object class="GtkLabel" id="my_label_infobar">
                 <property name="visible">True</property>
-                <property name="label">Warning: You need to start zerotier service, you could start at Settings/ZeroTier One, or opening a terminal and enter
-                  'sudo systemctl enable zerotier-one.service' otherwise, this app will not work.</property>
+                <property name="label">Warning: You need to start zerotier service,you could start at Settings/ZeroTier One, otherwise, this app will not work.</property>
               </object>
             </child>
           </object>
@@ -65,7 +61,7 @@
               <object class="AdwActionRow">
                 <property name="icon-name">dialog-error</property>
                 <property name="title">Sleepy_Heatherrington</property>
-                <property name="subtitle">NetID: e4da7455b2f2c2be Status: Disconnected</property>
+                <property name="subtitle">NetID: a9ld6679agpgc4te Status: Disconnected</property>
                 <property name="activatable">True</property>
                 <signal name="activate" handler="on_copy_item_activate"/>
                 <child>
@@ -86,7 +82,7 @@
               <object class="AdwActionRow">
                 <property name="icon-name">emblem-default</property>
                 <property name="title">Sleepy_Heatherrington</property>
-                <property name="subtitle">NetID: e4da7455b2f2c2be Status:OK</property>
+                <property name="subtitle">NetID: a9ld6679agpgc4te Status:OK</property>
                 <property name="activatable">True</property>
                 <child>
                   <object class="GtkSwitch">
@@ -106,7 +102,7 @@
               <object class="AdwActionRow">
                 <property name="icon-name">emblem-important</property>
                 <property name="title">Sleepy_Heatherrington</property>
-                <property name="subtitle">NetID: e4da7455b2f2c2be Status: ACCESS_DENIED</property>
+                <property name="subtitle">NetID: a9ld6679agpgc4te Status: ACCESS_DENIED</property>
                 <property name="activatable">True</property>
                 <child>
                   <object class="GtkSwitch">
@@ -120,10 +116,8 @@
                     <property name="valign">center</property>
                   </object>
                 </child>
-
                 </object>
               </child>
-
               </object>
             </child>
           </object>

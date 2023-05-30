@@ -24,24 +24,25 @@ My final objective it's to be in GNOME SOFTWARE and in Flatpak
 
 Still in Development.
 
-## Screenshot (MOKUPS)
+## Screenshot
 
-This are work in progress mokups, final version may differ.
+This are work in progress UI, final version may differ.
 
-![](https://i.imgur.com/1joHMUy.png)
+![](https://i.imgur.com/ipBgTwA.png)
 
-![](https://i.imgur.com/GS0Oxj1.png)
+![](https://i.imgur.com/MRC9oKS.png)
 
-![](https://i.imgur.com/7SqHEGI.png)
+![](https://i.imgur.com/Z1pqvhK.png)
 
-![](https://i.imgur.com/7SqHEGI.png)
+![](https://i.imgur.com/tSo3VBH.png)
 
 
 ## Features
 * Work in progress
 
 - [X] Detect if zerotier-one is alive
-- [ ] Give the option to configure the service
+- [X] Give the option to start the service
+- [ ] Give the option to enable the service
 - [ ] Show networks
 - [ ] Add a new network
 - [ ] View detail settings of a network
@@ -51,7 +52,7 @@ This are work in progress mokups, final version may differ.
 
 ## Download & Install
 
-Don't try to download it, it won't work at all.
+Don't try to download it.
 
 ## How to contribute
 

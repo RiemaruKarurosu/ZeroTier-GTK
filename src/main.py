@@ -34,11 +34,7 @@ class ZerotierGtkApplication(Adw.Application):
     def __init__(self):
         super().__init__(application_id='org.gnome.zerotiergtk',
                          flags=Gio.ApplicationFlags.DEFAULT_FLAGS)
-
-        #self.action_rows_manager = AdwActionRowsManager()
-
-
-        self.create_action('quit', lambda *_: self.quit(), ['<primary>q'])
+        self.create_action('quit', lambda *_: self.quit(), ['<primary>'])
         self.create_action('about', self.on_about_action)
         self.create_action('preferences', self.on_preferences_action)
 
@@ -54,16 +50,15 @@ class ZerotierGtkApplication(Adw.Application):
         if not self.zerotier_window:
             self.zerotier_window = ZerotierGtkWindow(application=self)
             self.zerotier_window.on_check_lib()
-            #zerotier_window = ZerotierGtkWindow(application=self)
         self.zerotier_window.present()
 
     def on_about_action(self, widget, _):
         """Callback for the app.about action."""
         about = Adw.AboutWindow(transient_for=self.props.active_window,
-                                application_name='zerotier-gtk',
+                                application_name='Zerotier-GTK',
                                 application_icon='org.gnome.zerotiergtk',
-                                developer_name='Zerotier-GTK',
-                                version='1.4.2-alpha',
+                                developer_name='NOT FOR ACTUAL USE',
+                                version='1.4.3 - ALPHA',
                                 developers=['Riemaru Karurosu'],
                                 copyright='© 2023 Zerotier-GUI',
                                 issue_url='https://github.com/RiemaruKarurosu/ZeroTier-GUI')
