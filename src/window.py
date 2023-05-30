@@ -29,12 +29,22 @@ class ZerotierGtkWindow(Adw.ApplicationWindow):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-
+        self.ztlib = ZeroTierNetwork()
 
     def on_check_lib(self):
-        ztlib = ZeroTierNetwork()
-        print(ztlib.ztStatus())
-        if ztlib.ztStatus():
+        if self.ztlib.ztStatus():
             self.my_infobar.set_visible(False)
+            return True
         else:
             self.my_infobar.set_visible(True)
+            return False
+
+    def on_service_set(self,status):
+        status = self.ztlib.service(status)
+        self.on_check_lib()
+        return status
+
+    def get_service_status(self):
+        return self.ztlib.ztEnableStatus()
+
+        

@@ -18,6 +18,8 @@
 
 ZeroTier GTK it's a fork project from [Zerotier-GUI](https://github.com/tralph3/ZeroTier-GUI) with GNOME users in mind. NOT READY FOR USE.
 
+My final objective it's to be in GNOME SOFTWARE and in Flatpak
+
 ## State of the project
 
 Still in Development.
@@ -38,10 +40,27 @@ This are work in progress mokups, final version may differ.
 ## Features
 * Work in progress
 
+- [X] Detect if zerotier-one is alive
+- [ ] Give the option to configure the service
+- [ ] Show networks
+- [ ] Add a new network
+- [ ] View detail settings of a network
+- [ ] Disconnect from a network
+- [ ] Eliminate a network
+- [ ] Show Peers
+
 ## Download & Install
 
 Don't try to download it, it won't work at all.
 
+## How to contribute
+
+How to contribute:
+
+https://github.com/RiemaruKarurosu/ZeroTier-GTK/wiki/How-to-contribute
+
+Zerotierlib doc:
+https://github.com/RiemaruKarurosu/ZeroTier-GTK/wiki/Zerotierlib-DOCS-v.1.4#zerotiernetwork/
 
 ## Troubleshooting
 

@@ -12,7 +12,8 @@
     "--socket=wayland",
     "--talk-name=org.freedesktop.DBus",
     "--talk-name=org.freedesktop.DBus.Debug.Stats",
-    "--socket=system-bus"
+    "--socket=system-bus",
+    "--filesystem=host"
   ],
   "cleanup": [
     "/include",
