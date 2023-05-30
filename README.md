@@ -11,7 +11,7 @@
 </div>
 
 [licence]: https://img.shields.io/badge/License-GPLv3-blue.svg
-[version]: https://img.shields.io/badge/Version-0.1.1-red
+[version]: https://img.shields.io/badge/Version-1.4.3-red
 [version-url]: https://github.com/RiemaruKarurosu/ZeroTier-GTK/releases
 [licence-url]: https://www.gnu.org/licenses/gpl-3.0
 [stars-shield]: https://img.shields.io/github/stars/noisetorch/NoiseTorch?maxAge=2592000
