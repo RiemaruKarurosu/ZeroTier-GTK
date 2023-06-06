@@ -14,7 +14,6 @@
 [version]: https://img.shields.io/badge/Version-1.4.3-red
 [version-url]: https://github.com/RiemaruKarurosu/ZeroTier-GTK/releases
 [licence-url]: https://www.gnu.org/licenses/gpl-3.0
-[stars-shield]: https://img.shields.io/github/stars/noisetorch/NoiseTorch?maxAge=2592000
 
 ZeroTier GTK it's a fork project from [Zerotier-GUI](https://github.com/tralph3/ZeroTier-GUI) with GNOME users in mind. NOT READY FOR USE.
 
@@ -38,7 +37,7 @@ This are work in progress UI, final version may differ.
 
 
 ## Features
-* Work in progress
+Work in progress
 
 - [X] Detect if zerotier-one is alive
 - [X] Give the option to start the service
