@@ -1,7 +1,6 @@
 import requests
 import subprocess
 import os
-import psutil
 
 from pydbus import SystemBus
 from pathlib import Path
