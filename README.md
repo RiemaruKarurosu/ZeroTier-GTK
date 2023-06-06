@@ -1,8 +1,6 @@
 <h1 align="center"> ZeroTier-GTK (STILL IN DEVELOP)</h1>
 <h3 align="center"> GTK + Libadwaita version of Zerotier GUI STILL IN DEVELOPMENT</h3>
 <p align="center"><img src="https://raw.githubusercontent.com/RiemaruKarurosu/ZeroTier-GTK/master/data/icons/hicolor/scalable/apps/org.gnome.zerotiergtk.svg" width="100" height="100"></p> 
-
-
 <div align="center">
     
   <a href="">[![Licence][licence]][licence-url]</a>
@@ -16,29 +14,16 @@
 [licence-url]: https://www.gnu.org/licenses/gpl-3.0
 
 ZeroTier GTK it's a fork project from [Zerotier-GUI](https://github.com/tralph3/ZeroTier-GUI) with GNOME users in mind. NOT READY FOR USE.
-
 My final objective it's to be in GNOME SOFTWARE and in Flatpak
-
 ## State of the project
-
 Still in Development.
-
 ## Screenshot
-
 This are work in progress UI, final version may differ.
-
 ![](https://i.imgur.com/ipBgTwA.png)
-
 ![](https://i.imgur.com/MRC9oKS.png)
-
 ![](https://i.imgur.com/Z1pqvhK.png)
-
 ![](https://i.imgur.com/tSo3VBH.png)
-
-
-## Features
-Work in progress
-
+## Planned Features
 - [X] Detect if zerotier-one is alive
 - [X] Give the option to start the service
 - [ ] Give the option to enable the service
@@ -48,32 +33,19 @@ Work in progress
 - [ ] Disconnect from a network
 - [ ] Eliminate a network
 - [ ] Show Peers
-
 ## Download & Install
-
 Don't try to download it.
-
 ## How to contribute
-
 How to contribute:
-
 https://github.com/RiemaruKarurosu/ZeroTier-GTK/wiki/How-to-contribute
-
 Zerotierlib doc:
 https://github.com/RiemaruKarurosu/ZeroTier-GTK/wiki/Zerotierlib-DOCS-v.1.4#zerotiernetwork/
-
 ## Troubleshooting
-
 NOT FOT ACTUAL USE.
-
 ## Usage
-
+NOT FOT ACTUAL USE.
 ### Alternatives
-
 - [Zerotier-GUI](https://github.com/tralph3/ZeroTier-GUI): A really nice and working solution, it's working in a rewritten version.
-
-
 ## Special thanks to
-
 * [@tralph3](https://github.com/tralph3) Creator of ZeroTier-GUI
-* [@Ivan-Rosales](https://github.com/Ivan-Rosales) 
+* [@Ivan-Rosales](https://github.com/Ivan-Rosales)
