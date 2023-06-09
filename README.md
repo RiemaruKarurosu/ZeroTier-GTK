@@ -14,7 +14,10 @@
 [licence-url]: https://www.gnu.org/licenses/gpl-3.0
 
 ZeroTier GTK it's a fork project from [Zerotier-GUI](https://github.com/tralph3/ZeroTier-GUI) with GNOME users in mind. NOT READY FOR USE.
-My final objective it's to be in GNOME SOFTWARE and in Flatpak
+
+ANNOUNCEMENT: FLATPAK VERSION WILL BE SUSPENDED, IT'S NOT POSSIBLE TO DO ALL I WANT.
+
+
 ## State of the project
 Still in Development.
 ## Screenshot
