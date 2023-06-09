@@ -16,7 +16,7 @@ class PreferencesSettings:
         group.set_title("Zerotier Service")
         print(zerotier_window.get_service_status())
         self.create_action_rows(group,"Zerotier start","The app needs this to work",self.on_switch_state_start,zerotier_window.on_check_lib(),True)
-        self.create_action_rows(group,"Zerotier start on boot","Start zerotier service on boot -NOT WORKING- go to terminal and type: sudo systemctl enable zerotier-one",self.on_switch_state_enable,zerotier_window.get_service_status(),False)
+        self.create_action_rows(group,"Zerotier start on boot","Start zerotier service on boot -NOT WORKING- go to terminal and type: sudo systemctl enable zerotier-one",self.on_switch_state_enable,zerotier_window.get_service_status(),True)
         page.add(group)
         window.add(page)
         window.present()
@@ -42,14 +42,14 @@ class PreferencesSettings:
     def on_switch_state_enable(self,switch,state):
         if switch.get_active():
             self.window_zerotier.get_service_status()
-            self.window_zerotier.on_service_set(3)
+            print(self.window_zerotier.on_service_set(3))
+            self.window_zerotier.get_service_status()
             print('encendido 1')
-            pass
         else:
             self.window_zerotier.get_service_status()
-            self.window_zerotier.on_service_set(4)
+            print(self.window_zerotier.on_service_set(4))
+            self.window_zerotier.get_service_status()
             print('apagado 1')
-            pass
 
     def create_action_rows(self,group,title,subtitle,activation,status,active):
         start = Adw.ActionRow.new()

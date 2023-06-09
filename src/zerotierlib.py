@@ -1,9 +1,9 @@
+from pydbus import SystemBus
+from pathlib import Path
+
 import requests
 import subprocess
 import os
-
-from pydbus import SystemBus
-from pathlib import Path
 
 #
 # ZeroTier Class
@@ -28,10 +28,10 @@ class ZeroTierNetwork:
             self.headers = None
 
     # Won't work because flatpak, needs dbus rewrite'
-    def ztStart(self) -> str:
-        if not self.checkToken(self.api_token):
-            if self.readToken() == 401 or self.readToken() == 404:
-                if self.checkToken(self.getToken()):
+    def zt_start(self) -> str:
+        if not self.check_token(self.api_token):
+            if self.read_token() == 401 or self.read_token() == 404:
+                if self.check_token(self.get_token()):
                     return 'OK'
                 else:
                     return 'MISSING ROOT PERMISSION'
@@ -43,7 +43,7 @@ class ZeroTierNetwork:
 
     # Check if ZeroTier-One is active
     # New Pydbus implementation
-    def ztStatus(self) -> bool:
+    def zt_status(self) -> bool:
         bus = SystemBus()
         systemd = bus.get(".systemd1")
         for unit in systemd.ListUnits():
@@ -54,7 +54,7 @@ class ZeroTierNetwork:
                     return False
         return False
 
-    def ztEnableStatus(self) -> bool:
+    def zt_enable_status(self) -> bool:
         bus = SystemBus()
         systemd = bus.get(".systemd1")
         state = systemd.GetUnitFileState(self.SERVICE)
@@ -69,13 +69,14 @@ class ZeroTierNetwork:
         if setstatus:
             try:
                 self.serviceStatus = self.COMMANDS[setstatus - 1]
-                self._ztActivate()
+                self._zt_activate()
                 return True
-            except Exception:
+            except Exception as e:
+                print(e)
                 return False
 
 
-    def _ztActivate(self):
+    def _zt_activate(self):
         print("llega aqui")
         bus = SystemBus()
         systemd = bus.get(".systemd1")
@@ -85,9 +86,11 @@ class ZeroTierNetwork:
         elif self.serviceStatus == self.COMMANDS[1]:
             systemd.StopUnit(self.SERVICE,"replace")
         elif self.serviceStatus == self.COMMANDS[2]:
-            systemd.EnableUnitFiles([self.SERVICE],False,True)
+            systemd.EnableUnitFiles(['zerotier-one.service'],False,True)
+            systemd.Reload()
         elif self.serviceStatus == self.COMMANDS[3]:
-            systemd.DisableUnitFiles([self.SERVICE],False)
+            systemd.DisableUnitFiles(['zerotier-one.service'],False)
+            systemd.Reload()
         else:
             print("Error, no existe")
 
@@ -95,7 +98,7 @@ class ZeroTierNetwork:
         self.serviceStatus = None
 
     # Save apiToken to ~/.config
-    def readToken(self) -> int:
+    def read_token(self) -> int:
         configpath = self.PATH / self.FILE
         if configpath.exists():
             with open(configpath, 'r') as configfile:
@@ -104,7 +107,7 @@ class ZeroTierNetwork:
                 if token.startswith('X-ZT1-Auth'):
                     key, value = token.split('=')
                     api_token = value.strip()
-                    if self.checkToken(api_token):
+                    if self.check_token(api_token):
                         self.api_token = api_token
                         self.headers = {'X-ZT1-Auth': f'{api_token}'}
                     else:
@@ -113,7 +116,7 @@ class ZeroTierNetwork:
         else:
             return 404
 
-    def checkToken(self, api_token):
+    def check_token(self, api_token):
         url = self.URL + 'status'
         header = {'X-ZT1-Auth': f'{api_token}'}
         response = requests.get(url, headers=header)
@@ -124,7 +127,7 @@ class ZeroTierNetwork:
         else:
             return False
 
-    def saveToken(self):
+    def save_token(self):
         if not self.PATH.exists():
             self.PATH.mkdir(parents=True)
         configpath = self.PATH / self.FILE
@@ -138,23 +141,23 @@ class ZeroTierNetwork:
         print(configpath)
 
     # Get the Token to use ZeroTierOne Service
-    def getToken(self):
+    def get_token(self):
         try:
             cmd = ['pkexec', 'cat', '/var/lib/zerotier-one/authtoken.secret']
             result = subprocess.run(cmd, capture_output=True, text=True, check=True)
             clave_api = result.stdout.strip()
             print(f'Saving API: {clave_api}')
-            if self.checkToken(clave_api):
+            if self.check_token(clave_api):
                 self.api_token = clave_api
                 self.headers = {'X-ZT1-Auth': f'{self.api_token}'}
-                self.saveToken()
+                self.save_token()
                 return clave_api
         except subprocess.CalledProcessError:
             return 'Error[01]: MissingRootAdmin'
 
         # ListNetworks
 
-    def getNetworks(self, network=None):
+    def get_networks(self, network=None):
         if network:
             url = self.URL + 'network/' + network
         else:
@@ -162,24 +165,24 @@ class ZeroTierNetwork:
         response = requests.get(url, headers=self.headers)
         return response.json()
 
-    def joinNetworks(self, network):
+    def join_networks(self, network):
         url = self.URL + 'network' + network
         response = requests.post(url, headers=self.headers)
         print(response.json())
         return response.json()
 
-    def updateNetwork(self, network, config):
+    def update_network(self, network, config):
         # Version 2.0 plan.
         pass
 
-    def leaveNetworks(self, network):
+    def leave_networks(self, network):
         url = self.URL + 'network' + network
         response = requests.delete(url, headers=self.headers)
         print(response)
         return response
         # Peers
 
-    def getPeers(self, network=None):
+    def get_peers(self, network=None):
         if network:
             url = self.URL + 'peer/' + network
         else:
