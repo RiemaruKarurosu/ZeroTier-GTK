@@ -13,42 +13,47 @@
 [version-url]: https://github.com/RiemaruKarurosu/ZeroTier-GTK/releases
 [licence-url]: https://www.gnu.org/licenses/gpl-3.0
 
-ZeroTier GTK it's a fork project from [Zerotier-GUI](https://github.com/tralph3/ZeroTier-GUI) with GNOME users in mind. NOT READY FOR USE.
+ZeroTier-GTK is a GTK+ Libadwaita version of the ZeroTier GUI, specifically designed for GNOME users. Please note that this project is currently still in development and is not ready for use. It is a fork of the original ZeroTier-GUI project.
 
-ANNOUNCEMENT: FLATPAK VERSION WILL BE SUSPENDED, IT'S NOT POSSIBLE TO DO ALL I WANT.
+![ZeroTier-GTK Logo](https://raw.githubusercontent.com/RiemaruKarurosu/ZeroTier-GTK/master/data/icons/hicolor/scalable/apps/org.gnome.zerotiergtk.svg)
 
+## State of the Project
+ZeroTier-GTK is still in active development, and its features are not fully implemented yet. Please be aware that it is not suitable for production use at this time.
 
-## State of the project
-Still in Development.
-## Screenshot
-This are work in progress UI, final version may differ.
-![](https://i.imgur.com/ipBgTwA.png)
-![](https://i.imgur.com/MRC9oKS.png)
-![](https://i.imgur.com/Z1pqvhK.png)
-![](https://i.imgur.com/tSo3VBH.png)
 ## Planned Features
-- [X] Detect if zerotier-one is alive
-- [X] Give the option to start the service
-- [ ] Give the option to enable the service
-- [ ] Show networks
-- [ ] Add a new network
-- [ ] View detail settings of a network
-- [ ] Disconnect from a network
-- [ ] Eliminate a network
-- [ ] Show Peers
-## Download & Install
-Don't try to download it.
-## How to contribute
-How to contribute:
-https://github.com/RiemaruKarurosu/ZeroTier-GTK/wiki/How-to-contribute
-Zerotierlib doc:
-https://github.com/RiemaruKarurosu/ZeroTier-GTK/wiki/Zerotierlib-DOCS-v.1.4#zerotiernetwork/
+The following features are planned for inclusion in ZeroTier-GTK:
+
+- Detect if the zerotier-one service is running
+- Provide the option to start the service
+- Provide the option to enable the service
+- Show networks
+- Add a new network
+- View detailed settings of a network
+- Disconnect from a network
+- Remove a network
+- Show peers
+
+## Screenshots
+Please keep in mind that the screenshots provided are a work in progress, and the final version may differ.
+
+![Screenshot 1](https://i.imgur.com/ipBgTwA.png)
+![Screenshot 2](https://i.imgur.com/MRC9oKS.png)
+![Screenshot 3](https://i.imgur.com/Z1pqvhK.png)
+![Screenshot 4](https://i.imgur.com/tSo3VBH.png)
+
+## Download and Installation
+ZeroTier-GTK is not available for download at the moment. Please refrain from attempting to download or install it until a stable release is announced.
+
+## How to Contribute
+If you are interested in contributing to ZeroTier-GTK, please refer to the project's [contribution guidelines](https://github.com/RiemaruKarurosu/ZeroTier-GTK/wiki/How-to-contribute). Additionally, you can find documentation for the Zerotierlib used in this project [here](https://github.com/RiemaruKarurosu/ZeroTier-GTK/wiki/Zerotierlib-DOCS-v.1.4#zerotiernetwork/).
+
 ## Troubleshooting
-NOT FOT ACTUAL USE.
-## Usage
-NOT FOT ACTUAL USE.
-### Alternatives
-- [Zerotier-GUI](https://github.com/tralph3/ZeroTier-GUI): A really nice and working solution, it's working in a rewritten version.
-## Special thanks to
-* [@tralph3](https://github.com/tralph3) Creator of ZeroTier-GUI
-* [@Ivan-Rosales](https://github.com/Ivan-Rosales)
+As mentioned earlier, ZeroTier-GTK is still in development and should not be used for actual purposes. Therefore, troubleshooting guidance is not available at this time.
+
+## Alternatives
+If you require a working solution for managing ZeroTier networks, you can consider using the original [ZeroTier-GUI](https://github.com/tralph3/ZeroTier-GUI) project. It is a well-established and functional application that has undergone a rewrite.
+
+## Special Thanks
+Special thanks to the following individuals for their contributions to ZeroTier-GTK:
+- [@tralph3](https://github.com/tralph3) - Creator of ZeroTier-GUI
+- [@Ivan-Rosales](https://github.com/Ivan-Rosales)
