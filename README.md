@@ -15,7 +15,6 @@
 
 ZeroTier-GTK is a GTK+ Libadwaita version of the ZeroTier GUI, specifically designed for GNOME users. Please note that this project is currently still in development and is not ready for use. It is a fork of the original ZeroTier-GUI project.
 
-![ZeroTier-GTK Logo](https://raw.githubusercontent.com/RiemaruKarurosu/ZeroTier-GTK/master/data/icons/hicolor/scalable/apps/org.gnome.zerotiergtk.svg)
 
 ## State of the Project
 ZeroTier-GTK is still in active development, and its features are not fully implemented yet. Please be aware that it is not suitable for production use at this time.
