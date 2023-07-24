@@ -19,14 +19,15 @@
 
 import sys
 import gi
-from zerotier_gtk.zerotierlib import *
-from zerotier_gtk.preferences import *
+from zerotierlib import *
+from preferences import *
 
 gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')
 
 from gi.repository import Gtk, Gio, Adw
-from .window import ZerotierGtkWindow
+from window import ZerotierGtkWindow
+
 
 class ZerotierGtkApplication(Adw.Application):
     """The main application singleton class."""
@@ -66,8 +67,7 @@ class ZerotierGtkApplication(Adw.Application):
 
     def on_preferences_action(self, widget, _):
         """Callback for the app.preferences action."""
-        preferences = PreferencesSettings(self.zerotier_window,self)
-
+        preferences = PreferencesSettings(self.zerotier_window, self)
 
     def create_action_rows(self, window):
         """Create the action rows and add them to the window."""

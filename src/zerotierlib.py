@@ -5,16 +5,16 @@ import requests
 import subprocess
 import os
 
+
 #
 # ZeroTier Class
 # API version: 0.1.0
 #
 
 class ZeroTierNetwork:
-
     COMMANDS = ('start', 'stop', 'enable', 'disable')
     URL = 'http://localhost:9993/'
-    #PATH = Path.home() / '.config' / 'ztlib'
+    # PATH = Path.home() / '.config' / 'ztlib'
     FILE = 'zt.conf'
     SERVICE = 'zerotier-one.service'
 
@@ -37,7 +37,6 @@ class ZeroTierNetwork:
                     return 'MISSING ROOT PERMISSION'
             return 'OK'
         return 'OK'
-
 
         # ZeroTier Status:
 
@@ -75,25 +74,23 @@ class ZeroTierNetwork:
                 print(e)
                 return False
 
-
     def _zt_activate(self):
         print("llega aqui")
         bus = SystemBus()
         systemd = bus.get(".systemd1")
         if self.serviceStatus == self.COMMANDS[0]:
-            response = systemd.StartUnit(self.SERVICE,"replace")
+            response = systemd.StartUnit(self.SERVICE, "replace")
             print(response)
         elif self.serviceStatus == self.COMMANDS[1]:
-            systemd.StopUnit(self.SERVICE,"replace")
+            systemd.StopUnit(self.SERVICE, "replace")
         elif self.serviceStatus == self.COMMANDS[2]:
-            systemd.EnableUnitFiles(['zerotier-one.service'],False,True)
+            systemd.EnableUnitFiles(['zerotier-one.service'], False, True)
             systemd.Reload()
         elif self.serviceStatus == self.COMMANDS[3]:
-            systemd.DisableUnitFiles(['zerotier-one.service'],False)
+            systemd.DisableUnitFiles(['zerotier-one.service'], False)
             systemd.Reload()
         else:
             print("Error, no existe")
-
 
         self.serviceStatus = None
 
@@ -190,5 +187,3 @@ class ZeroTierNetwork:
         response = requests.get(url, headers=self.headers)
         print(response.json())
         return response.json()
-
-
