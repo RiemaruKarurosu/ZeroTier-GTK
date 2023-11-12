@@ -75,7 +75,7 @@ class ZerotierGtkApplication(Adw.Application):
         preferences_group = window.get_preferences()
 
         # Create and add an AdwActionRow for each item in the list
-        items = ['item1', 'item2', 'item3']  # replace with your list of items
+        items = ['item1', 'item2', 'item3']
         for item in items:
             action_row = Adw.ActionRow()
             label = Gtk.Label(label=item)

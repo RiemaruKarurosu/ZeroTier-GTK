@@ -11,9 +11,10 @@
     "--device=dri",
     "--socket=wayland",
     "--talk-name=org.freedesktop.DBus",
+    "--talk-name=org.freedesktop.Flatpak",
     "--talk-name=org.freedesktop.DBus.Debug.Stats",
     "--socket=system-bus",
-    "--filesystem=host"
+    "--filesystem=home"
   ],
   "cleanup": [
     "/include",
