@@ -30,7 +30,6 @@ from .window import ZerotierGtkWindow
 
 
 class ZerotierGtkApplication(Adw.Application):
-    """The main application singleton class."""
 
     def __init__(self):
         super().__init__(application_id='org.gnome.zerotiergtk',
@@ -42,7 +41,6 @@ class ZerotierGtkApplication(Adw.Application):
         self.zerotier_window = None
 
     def do_activate(self):
-
         self.zerotier_window = self.props.active_window
         if not self.zerotier_window:
             self.zerotier_window = ZerotierGtkWindow(application=self)
@@ -50,7 +48,6 @@ class ZerotierGtkApplication(Adw.Application):
         self.zerotier_window.present()
 
     def on_about_action(self, widget, _):
-
         about = Adw.AboutWindow(transient_for=self.props.active_window,
                                 application_name='Zerotier-GTK',
                                 application_icon='org.gnome.zerotiergtk',
@@ -64,34 +61,7 @@ class ZerotierGtkApplication(Adw.Application):
     def on_preferences_action(self, widget, _):
         preferences = PreferencesSettings(self.zerotier_window, self)
 
-    def create_action_rows(self, window):
-        """Create the action rows and add them to the window."""
-        # Get the AdwPreferencesGroup from the window
-        preferences_group = window.get_preferences()
-
-        # Create and add an AdwActionRow for each item in the list
-        items = ['item1', 'item2', 'item3']
-        for item in items:
-            action_row = Adw.ActionRow()
-            label = Gtk.Label(label=item)
-            action_row.set_title_widget(label)
-
-            switch = Gtk.Switch()
-            switch.set_active(True)
-            action_row.set_action_widget(switch)
-
-            preferences_group.add(action_row)
-        preferences_group.show_all()
-
     def create_action(self, name, callback, shortcuts=None):
-        """Add an application action.
-
-        Args:
-            name: the name of the action
-            callback: the function to be called when the action is
-              activated
-            shortcuts: an optional list of accelerators
-        """
         action = Gio.SimpleAction.new(name, None)
         action.connect("activate", callback)
         self.add_action(action)
@@ -100,6 +70,5 @@ class ZerotierGtkApplication(Adw.Application):
 
 
 def main(version):
-    """The application's entry point."""
     app = ZerotierGtkApplication()
     return app.run(sys.argv)

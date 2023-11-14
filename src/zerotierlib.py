@@ -26,7 +26,7 @@ class ZeroTierNetwork:
         else:
             self.headers = None
 
-    # Won't work because flatpak, needs dbus rewrite'
+    # Maybe Work(?
     def zt_start(self) -> str:
         if not self.check_token(self.api_token):
             if self.read_token() == 401 or self.read_token() == 404:
