@@ -139,8 +139,8 @@ class ZeroTierNetwork:
     # Get the Token to use ZeroTierOne Service
     def get_token(self):
         try:
-            cmd = ['flatpak-spawn --host', 'pkexec', 'cat', '/var/lib/zerotier-one/authtoken.secret']
-            result = subprocess.run(cmd, capture_output=True, text=True, check=True)
+            cmd = "flatpak-spawn --host pkexec cat /var/lib/zerotier-one/authtoken.secret"
+            result = subprocess.run(cmd, shell=True, capture_output=True, text=True, check=True)
             clave_api = result.stdout.strip()
             print(f'Saving API: {clave_api}')
             if self.check_token(clave_api):

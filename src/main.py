@@ -28,6 +28,7 @@ gi.require_version('Adw', '1')
 from gi.repository import Gtk, Gio, Adw
 from .window import ZerotierGtkWindow
 
+
 class ZerotierGtkApplication(Adw.Application):
     """The main application singleton class."""
 
@@ -41,11 +42,7 @@ class ZerotierGtkApplication(Adw.Application):
         self.zerotier_window = None
 
     def do_activate(self):
-        """Called when the application is activated.
 
-        We raise the application's main window, creating it if
-        necessary.
-        """
         self.zerotier_window = self.props.active_window
         if not self.zerotier_window:
             self.zerotier_window = ZerotierGtkWindow(application=self)
@@ -53,7 +50,7 @@ class ZerotierGtkApplication(Adw.Application):
         self.zerotier_window.present()
 
     def on_about_action(self, widget, _):
-        """Callback for the app.about action."""
+
         about = Adw.AboutWindow(transient_for=self.props.active_window,
                                 application_name='Zerotier-GTK',
                                 application_icon='org.gnome.zerotiergtk',
@@ -65,9 +62,7 @@ class ZerotierGtkApplication(Adw.Application):
         about.present()
 
     def on_preferences_action(self, widget, _):
-        """Callback for the app.preferences action."""
-        preferences = PreferencesSettings(self.zerotier_window,self)
-
+        preferences = PreferencesSettings(self.zerotier_window, self)
 
     def create_action_rows(self, window):
         """Create the action rows and add them to the window."""
