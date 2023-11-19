@@ -27,9 +27,12 @@ gi.require_version('Adw', '1')
 
 from gi.repository import Gtk, Gio, Adw
 from .window import ZerotierGtkWindow
+from zerotier_gtk.zerotierlib import *
 
 
 class ZerotierGtkApplication(Adw.Application):
+
+    ztlib = ZeroTierNetwork()
 
     def __init__(self):
         super().__init__(application_id='org.gnome.zerotiergtk',
@@ -37,7 +40,6 @@ class ZerotierGtkApplication(Adw.Application):
         self.create_action('quit', lambda *_: self.quit(), ['<primary>'])
         self.create_action('about', self.on_about_action)
         self.create_action('preferences', self.on_preferences_action)
-
         self.zerotier_window = None
 
     def do_activate(self):
@@ -55,7 +57,7 @@ class ZerotierGtkApplication(Adw.Application):
                                 version='1.4.3 - ALPHA',
                                 developers=['Riemaru Karurosu'],
                                 copyright='© 2023 Zerotier-GUI',
-                                issue_url='https://github.com/RiemaruKarurosu/ZeroTier-GUI')
+                                issue_url='https://github.com/RiemaruKarurosu/ZeroTier-GTK/issues')
         about.present()
 
     def on_preferences_action(self, widget, _):

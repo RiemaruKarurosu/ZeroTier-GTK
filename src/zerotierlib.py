@@ -25,6 +25,7 @@ class ZeroTierNetwork:
             self.headers = {'X-ZT1-Auth': f'{api_token}'}
         else:
             self.headers = None
+        print(self.zt_start())
 
     # Maybe Work(?
     def zt_start(self) -> str:

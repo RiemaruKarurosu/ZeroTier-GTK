@@ -28,6 +28,7 @@ class ZerotierGtkWindow(Adw.ApplicationWindow):
 
     my_infobar = Gtk.Template.Child()
     action_row = Gtk.Template.Child()
+    addnetwork = Gtk.Template.Child()
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
