@@ -40,7 +40,9 @@ class ZerotierGtkApplication(Adw.Application):
         self.create_action('quit', lambda *_: self.quit(), ['<primary>'])
         self.create_action('about', self.on_about_action)
         self.create_action('preferences', self.on_preferences_action)
-        self.zerotier_window = None
+
+
+
 
     def do_activate(self):
         self.zerotier_window = self.props.active_window
@@ -62,6 +64,9 @@ class ZerotierGtkApplication(Adw.Application):
 
     def on_preferences_action(self, widget, _):
         preferences = PreferencesSettings(self.zerotier_window, self)
+
+
+
 
     def create_action(self, name, callback, shortcuts=None):
         action = Gio.SimpleAction.new(name, None)

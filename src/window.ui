@@ -21,12 +21,14 @@
               <object class="GtkButton" id="addnetwork">
                 <property name="icon-name">list-add</property>
                 <property name="focusable">true</property>
+                <signal name="clicked" handler="on_add_network_clicked" swapped="no"/>
               </object>
             </child>
             <child>
-              <object class="GtkButton" id="refresh">
+              <object class="GtkButton" id="refresh_button">
                 <property name="icon-name">view-refresh</property>
                 <property name="focusable">true</property>
+                <signal name="clicked" handler="on_refresh_button_clicked" swapped="no"/>
               </object>
             </child>
           </object>
@@ -48,76 +50,15 @@
             <property name="hexpand">TRUE</property>
             <property name="vexpand">TRUE</property>
             <child>
-          <object class="AdwPreferencesGroup" id="action_row">
-            <property name="title">Networks: </property>
-            <property name="margin-bottom">15</property>
-            <property name="margin-end">35</property>
-            <property name="margin-start">35</property>
-            <property name="margin-top">25</property>
-            <style>
-              <class name="boxed-list"></class>
-            </style>
-            <child>
-              <object class="AdwActionRow">
-                <property name="icon-name">dialog-error</property>
-                <property name="title">Sleepy_Heatherrington</property>
-                <property name="subtitle">NetID: a9ld6679agpgc4te Status: Disconnected</property>
-                <property name="activatable">True</property>
-                <signal name="activate" handler="on_copy_item_activate"/>
-                <child>
-                  <object class="GtkSwitch">
-                    <property name="halign">end</property>
-                    <property name="valign">center</property>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkButton">
-                    <property name="icon-name">preferences-system</property>
-                    <property name="valign">center</property>
-                  </object>
-                </child>
-              </object>
-            </child>
-            <child>
-              <object class="AdwActionRow">
-                <property name="icon-name">emblem-default</property>
-                <property name="title">Sleepy_Heatherrington</property>
-                <property name="subtitle">NetID: a9ld6679agpgc4te Status:OK</property>
-                <property name="activatable">True</property>
-                <child>
-                  <object class="GtkSwitch">
-                    <property name="halign">end</property>
-                    <property name="valign">center</property>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkButton">
-                    <property name="icon-name">preferences-system</property>
-                    <property name="valign">center</property>
-                  </object>
-                </child>
-              </object>
-            </child>
-            <child>
-              <object class="AdwActionRow">
-                <property name="icon-name">emblem-important</property>
-                <property name="title">Sleepy_Heatherrington</property>
-                <property name="subtitle">NetID: a9ld6679agpgc4te Status: ACCESS_DENIED</property>
-                <property name="activatable">True</property>
-                <child>
-                  <object class="GtkSwitch">
-                    <property name="halign">end</property>
-                    <property name="valign">center</property>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkButton">
-                    <property name="icon-name">preferences-system</property>
-                    <property name="valign">center</property>
-                  </object>
-                </child>
-                </object>
-              </child>
+              <object class="AdwPreferencesGroup" id="action_row">
+              <property name="title">Networks: </property>
+              <property name="margin-bottom">15</property>
+              <property name="margin-end">35</property>
+              <property name="margin-start">35</property>
+              <property name="margin-top">25</property>
+              <style>
+                <class name="boxed-list"></class>
+              </style>
               </object>
             </child>
           </object>
