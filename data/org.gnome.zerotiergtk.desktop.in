@@ -1,8 +1,0 @@
-[Desktop Entry]
-Name=zerotier-gtk
-Exec=zerotier-gtk
-Icon=org.gnome.zerotiergtk
-Terminal=false
-Type=Application
-Categories=GTK;
-StartupNotify=true
