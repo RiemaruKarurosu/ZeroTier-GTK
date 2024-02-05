@@ -1,6 +1,6 @@
 <h1 align="center"> ZeroTier-GTK (STILL IN DEVELOP)</h1>
 <h3 align="center"> GTK + Libadwaita version of Zerotier GUI STILL IN DEVELOPMENT</h3>
-<p align="center"><img src="https://raw.githubusercontent.com/RiemaruKarurosu/ZeroTier-GTK/master/data/icons/hicolor/scalable/apps/org.gnome.zerotiergtk.svg" width="100" height="100"></p> 
+<p align="center"><img src="https://raw.githubusercontent.com/RiemaruKarurosu/ZeroTier-GTK/master/data/icons/hicolor/scalable/apps/org.zerotier.ZerotierGTK.svg" width="100" height="100"></p> 
 <div align="center">
     
   <a href="">[![Licence][licence]][licence-url]</a>
