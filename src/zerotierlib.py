@@ -21,49 +21,65 @@ class ZeroTierNetwork:
         self.api_token = api_token
         self.serviceStatus = None
         self.listNetworks = []
-        if api_token:
+        if self.api_token:
             self.headers = {'X-ZT1-Auth': f'{api_token}'}
+            print(self.api_token)
         else:
             self.headers = None
         print(self.zt_start())
 
     # Maybe Work(?
     def zt_start(self) -> str:
-        if not self.check_token(self.api_token):
-            if self.read_token() == 401 or self.read_token() == 404:
-                if self.check_token(self.get_token()):
-                    return 'OK'
-                else:
-                    return 'MISSING ROOT PERMISSION'
+        try:
+            if not self.check_token(self.api_token):
+                if self.read_token() == 401 or self.read_token() == 404:
+                    if self.check_token(self.get_token()):
+                        return 'OK'
+                    else:
+                        return 'MISSING ROOT PERMISSION'
+                return 'OK'
             return 'OK'
-        return 'OK'
+        except Exception:
+            return 'MISSING ROOT PERMISSIONS EXCEPTION'
+
+
 
     # ZeroTier Status:
 
     # Check if ZeroTier-One is active
     # New Pydbus implementation
     def zt_status(self) -> bool:
-        bus = SystemBus()
-        systemd = bus.get(".systemd1")
-        for unit in systemd.ListUnits():
-            if unit[0] == self.SERVICE:
-                if unit[3] == "active" and unit[4] == 'running':
-                    return True
-                else:
-                    return False
-        return False
-
-    def zt_enable_status(self) -> bool:
-        bus = SystemBus()
-        systemd = bus.get(".systemd1")
-        state = systemd.GetUnitFileState(self.SERVICE)
-        print(state)
-        if state == 'enabled':
-            return True
-        elif state == 'disabled':
+        try:
+            bus = SystemBus()
+            systemd = bus.get(".systemd1")
+            for unit in systemd.ListUnits():
+                if unit[0] == self.SERVICE:
+                    if unit[3] == "active" and unit[4] == 'running':
+                        return True
+                    else:
+                        return False
+            return False
+        except Exception:
             return False
 
-    # Change ZeroTier-One service
+
+
+    def zt_enable_status(self) -> bool:
+        try:
+            bus = SystemBus()
+            systemd = bus.get(".systemd1")
+            state = systemd.GetUnitFileState(self.SERVICE)
+            print(state)
+            if state == 'enabled':
+                return True
+            elif state == 'disabled':
+                return False
+        except Exception:
+            return False
+
+
+
+    # Status ZeroTier-One service
     def service(self, setstatus):
         if setstatus:
             try:
@@ -75,7 +91,6 @@ class ZeroTierNetwork:
                 return False
 
     def _zt_activate(self):
-        print("llega aqui")
         bus = SystemBus()
         systemd = bus.get(".systemd1")
         if self.serviceStatus == self.COMMANDS[0]:
@@ -116,7 +131,10 @@ class ZeroTierNetwork:
     def check_token(self, api_token):
         url = self.URL + 'status'
         header = {'X-ZT1-Auth': f'{api_token}'}
-        response = requests.get(url, headers=header)
+        try:
+            response = requests.get(url, headers=header)
+        except Exception:
+            return False
         if response.status_code == 200:
             return True
         elif response.status_code == 401:
@@ -187,3 +205,4 @@ class ZeroTierNetwork:
         response = requests.get(url, headers=self.headers)
         print(response.json())
         return response.json()
+

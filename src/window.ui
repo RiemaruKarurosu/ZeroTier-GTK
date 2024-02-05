@@ -2,7 +2,7 @@
 <interface>
   <requires lib="gtk" version="4.0"/>
   <requires lib="Adw" version="1.0"/>
-  <template class="ZerotierGtkWindow" parent="AdwApplicationWindow">
+  <template class="ZerotiergtkWindow" parent="AdwApplicationWindow">
     <property name="default-width">800</property>
     <property name="default-height">600</property>
     <property name="title">ZeroTier</property>
@@ -27,6 +27,7 @@
               <object class="GtkButton" id="refresh">
                 <property name="icon-name">view-refresh</property>
                 <property name="focusable">true</property>
+                <signal name="clicked" handler="on_refresh_clicked"></signal>
               </object>
             </child>
           </object>
@@ -57,67 +58,6 @@
                 <style>
                   <class name="boxed-list"></class>
                 </style>
-                <child>
-                  <object class="AdwActionRow">
-                    <property name="icon-name">dialog-error</property>
-                    <property name="title">Sleepy_Heatherrington</property>
-                    <property name="subtitle">NetID: a9ld6679agpgc4te Status: Disconnected</property>
-                    <property name="activatable">True</property>
-                    <signal name="activate" handler="on_copy_item_activate"/>
-                    <child>
-                      <object class="GtkSwitch">
-                        <property name="halign">end</property>
-                        <property name="valign">center</property>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkButton">
-                        <property name="icon-name">preferences-system</property>
-                        <property name="valign">center</property>
-                      </object>
-                    </child>
-                  </object>
-                </child>
-                <child>
-                  <object class="AdwActionRow">
-                    <property name="icon-name">emblem-default</property>
-                    <property name="title">Sleepy_Heatherrington</property>
-                    <property name="subtitle">NetID: a9ld6679agpgc4te Status:OK</property>
-                    <property name="activatable">True</property>
-                    <child>
-                      <object class="GtkSwitch">
-                        <property name="halign">end</property>
-                        <property name="valign">center</property>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkButton">
-                        <property name="icon-name">preferences-system</property>
-                        <property name="valign">center</property>
-                      </object>
-                    </child>
-                  </object>
-                </child>
-                <child>
-                  <object class="AdwActionRow">
-                    <property name="icon-name">emblem-important</property>
-                    <property name="title">Sleepy_Heatherrington</property>
-                    <property name="subtitle">NetID: a9ld6679agpgc4te Status: ACCESS_DENIED</property>
-                    <property name="activatable">True</property>
-                    <child>
-                      <object class="GtkSwitch">
-                        <property name="halign">end</property>
-                        <property name="valign">center</property>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkButton">
-                        <property name="icon-name">preferences-system</property>
-                        <property name="valign">center</property>
-                      </object>
-                    </child>
-                  </object>
-                </child>
               </object>
             </child>
           </object>
@@ -142,3 +82,5 @@
     </section>
   </menu>
 </interface>
+
+

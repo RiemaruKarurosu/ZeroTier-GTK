@@ -1,5 +1,5 @@
-project('zerotier-gtk',
-          version: '0.1.0',
+project('zerotiergtk',
+          version: '0.4.3',
     meson_version: '>= 0.62.0',
   default_options: [ 'warning_level=2', 'werror=false', ],
 )

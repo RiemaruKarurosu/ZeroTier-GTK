@@ -1,1 +1,1 @@
-i18n.gettext('zerotier-gtk', preset: 'glib')
+i18n.gettext('zerotiergtk', preset: 'glib')

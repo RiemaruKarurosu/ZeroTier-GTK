@@ -5,7 +5,7 @@ gi.require_version('Adw', '1')
 
 from gi.repository import Adw
 from gi.repository import Gtk
-from zerotier_gtk.zerotierlib import *
+from zerotiergtk.zerotierlib import *
 
 
 class PreferencesSettings:
@@ -106,3 +106,5 @@ class PreferencesSettings:
         )
         dialog.run()
         dialog.destroy()
+
+

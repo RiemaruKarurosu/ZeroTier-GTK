@@ -1,6 +1,6 @@
 # main.py
 #
-# Copyright 2023 Rivack Mares
+# Copyright 2024 Riemaru
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -19,15 +19,14 @@
 
 import sys
 import gi
-from zerotier_gtk.zerotierlib import *
-from zerotier_gtk.preferences import *
+from zerotiergtk.zerotierlib import *
+from zerotiergtk.preferences import *
 
 gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')
 
 from gi.repository import Gtk, Gio, Adw
-from .window import ZerotierGtkWindow
-from zerotier_gtk.zerotierlib import *
+from .window import ZerotiergtkWindow
 
 
 class ZerotierGtkApplication(Adw.Application):
@@ -35,7 +34,7 @@ class ZerotierGtkApplication(Adw.Application):
     ztlib = ZeroTierNetwork()
 
     def __init__(self):
-        super().__init__(application_id='org.gnome.zerotiergtk',
+        super().__init__(application_id='org.zerotier.zerotiergtk',
                          flags=Gio.ApplicationFlags.DEFAULT_FLAGS)
         self.create_action('quit', lambda *_: self.quit(), ['<primary>'])
         self.create_action('about', self.on_about_action)
@@ -45,14 +44,15 @@ class ZerotierGtkApplication(Adw.Application):
     def do_activate(self):
         self.zerotier_window = self.props.active_window
         if not self.zerotier_window:
-            self.zerotier_window = ZerotierGtkWindow(application=self)
+            self.zerotier_window = ZerotiergtkWindow(application=self)
             self.zerotier_window.on_check_lib()
         self.zerotier_window.present()
+
 
     def on_about_action(self, widget, _):
         about = Adw.AboutWindow(transient_for=self.props.active_window,
                                 application_name='Zerotier-GTK',
-                                application_icon='org.gnome.zerotiergtk',
+                                application_icon='org.zerotier.ZerotierGTK',
                                 developer_name='NOT FOR ACTUAL USE',
                                 version='1.4.3 - ALPHA',
                                 developers=['Riemaru Karurosu'],
@@ -74,3 +74,4 @@ class ZerotierGtkApplication(Adw.Application):
 def main(version):
     app = ZerotierGtkApplication()
     return app.run(sys.argv)
+
